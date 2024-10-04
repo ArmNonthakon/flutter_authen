@@ -1,4 +1,5 @@
 import 'package:arm_assigment_login/model/User.dart';
+import 'package:arm_assigment_login/validation_service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -87,10 +88,12 @@ class _RegisterState extends State<RegisterScreen> {
                     if (value == null || value.isEmpty) {
                       return 'Please enter your email';
                     }
-                    if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
-                      return 'Please enter a valid email address';
+                    final result = ValidationService.validateEmail(value);
+                    if (result != null) {
+                      return null;
+                    } else {
+                      return result;
                     }
-                    return null;
                   },
                   onChanged: (value) => _email = value,
                   decoration: const InputDecoration(
