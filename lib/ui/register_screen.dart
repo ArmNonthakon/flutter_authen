@@ -85,7 +85,8 @@ class _RegisterState extends State<RegisterScreen> {
                 TextFormField(
                   keyboardType: TextInputType.emailAddress,
                   validator: (value) {
-                    if (value == null || value.isEmpty) {
+                    if (ValidationService.validateInputIsEmpty(value!) !=
+                        null) {
                       return 'Please enter your email';
                     }
                     final result = ValidationService.validateEmail(value);
